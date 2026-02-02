@@ -1,7 +1,7 @@
 const { Highrise } = require("highrise.bot");
 
 const bot = new Highrise(
-  ["ChatEvent", "PlayerJoinedEvent", "PlayerLeftEvent"],
+  ["ChatEvent", "UserJoinedEvent", "UserLeftEvent"],
   {
     token: process.env.BOT_TOKEN,
     room: process.env.ROOM_ID
