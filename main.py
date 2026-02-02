@@ -1,5 +1,4 @@
-from highrise import BaseBot, User
-from highrise import run_bot
+from highrise import BaseBot, User, __main__
 import os
 
 class MyBot(BaseBot):
@@ -13,7 +12,10 @@ class MyBot(BaseBot):
     async def on_user_join(self, user: User):
         await self.highrise.chat(f"Welcome {user.username}! 🎉")
 
-token = os.environ["BOT_TOKEN"]
-room_id = os.environ["ROOM_ID"]
-
-run_bot(token, room_id, MyBot())
+if __name__ == "__main__":
+    token = os.environ["BOT_TOKEN"]
+    room_id = os.environ["ROOM_ID"]
+    
+    import asyncio
+    from highrise.__main__ import run
+    asyncio.run(run(room_id, token, MyBot()))
