@@ -1,22 +1,22 @@
-const Highrise = require("highrise.sdk").default;
+const { Highrise } = require("highrise.bot");
 
-const bot = new Highrise({
-  token: process.env.BOT_TOKEN,
-  room: process.env.ROOM_ID
-});
+const bot = new Highrise(
+  process.env.BOT_TOKEN,
+  process.env.ROOM_ID
+);
 
-bot.on("ready", (session) => {
+bot.on("ready", () => {
   console.log("Bot is online!");
 });
 
-bot.on("chatCreate", async (user, message) => {
+bot.on("chat", async (user, message) => {
   if (message.toLowerCase() === "hello") {
-    await bot.chat(`Hey ${user.username}! 👋`);
+    await bot.chat.send(`Hey ${user.username}! 👋`);
   }
 });
 
-bot.on("playerJoin", async (user) => {
-  await bot.chat(`Welcome ${user.username}! 🎉`);
+bot.on("join", async (user) => {
+  await bot.chat.send(`Welcome ${user.username}! 🎉`);
 });
 
 bot.connect();
