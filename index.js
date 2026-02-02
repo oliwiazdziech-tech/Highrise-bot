@@ -1,7 +1,7 @@
 const { Highrise } = require("highrise.bot");
 
 const bot = new Highrise(
-  ["ChatEvent", "UserJoinedEvent", "UserLeftEvent", "EmoteEvent", "TipEvent"],
+  ["ChatEvent", "UserJoinedEvent", "UserLeftEvent"],
   {
     LoggerOptions: {
       showTimestamp: true,
@@ -13,28 +13,38 @@ const bot = new Highrise(
   }
 );
 
-// Log ALL events
-bot.on("ready", (session) => {
-  console.log("Bot is ready!");
-  console.log("Session:", JSON.stringify(session));
+bot.on("ready", () => {
+  console.log("Bot is ready and connected!");
 });
 
+// Try all possible chat event names
 bot.on("chatCreate", async (user, message) => {
-  console.log("chatCreate:", user, message);
+  console.log("chatCreate event fired!");
+  console.log("User:", user);
+  console.log("Message:", message);
+  if (message.toLowerCase() === "hello") {
+    await bot.message.send(`Hey ${user.username}! 👋`);
+  }
 });
 
 bot.on("chat", async (user, message) => {
-  console.log("chat:", user, message);
+  console.log("chat event fired!");
+  if (message.toLowerCase() === "hello") {
+    await bot.message.send(`Hey ${user.username}! 👋`);
+  }
 });
 
-bot.on("ChatEvent", async (user, message) => {
-  console.log("ChatEvent:", user, message);
+bot.on("playerJoin", async (user) => {
+  console.log("playerJoin event fired!", user);
+  await bot.message.send(`Welcome ${user.username}! 🎉`);
 });
 
-bot.on("message", async (user, message) => {
-  console.log("message:", user, message);
-});
+console.log("Starting bot...");
 
+bot.login(
+  "8b43cfea13c50c96aa2120d7050d01ce1647189291f3a1266deb9fe6fe6da805",
+  "64209edc834771e7961016b9"
+);
 bot.on("playerJoin", async (user) => {
   console.log("playerJoin:", user);
 });
