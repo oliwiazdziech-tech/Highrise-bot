@@ -6,6 +6,9 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "highrise.sdk": "latest"
+    "highrise.sdk": "^1.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }
