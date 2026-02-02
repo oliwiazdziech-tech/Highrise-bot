@@ -1,19 +1,20 @@
 const { Highrise } = require("highrise.bot");
 
-// TEMPORARY: Hardcode values directly
-const myToken = "8b43cfea13c50c96aa2120d7050d01ce1647189291f3a1266deb9fe6fe6da805";
-const myRoom = "64209edc834771e7961016b9";
-
 const bot = new Highrise(
   ["ChatEvent", "UserJoinedEvent", "UserLeftEvent"],
   {
-    token: myToken,
-    room: myRoom
+    LoggerOptions: {
+      showTimestamp: true,
+      showMethodName: true,
+      colors: true
+    },
+    autoReconnect: true,
+    reconnectDelay: 5000
   }
 );
 
 bot.on("ready", () => {
-  console.log("Bot is online and connected!");
+  console.log("Bot is online!");
 });
 
 bot.on("chatCreate", async (user, message) => {
@@ -26,4 +27,8 @@ bot.on("playerJoin", async (user) => {
   await bot.message.send(`Welcome ${user.username}! 🎉`);
 });
 
-bot.connect();
+// Use login method instead
+bot.login(
+  "8b43cfea13c50c96aa2120d7050d01ce1647189291f3a1266deb9fe6fe6da805",
+  "64209edc834771e7961016b9"
+);
