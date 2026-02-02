@@ -6,7 +6,7 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "highrise.sdk": "^1.0.0"
+    "highrise.bot": "latest"
   },
   "engines": {
     "node": ">=18.0.0"
