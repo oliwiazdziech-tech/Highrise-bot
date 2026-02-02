@@ -1,15 +1,30 @@
 const { Highrise } = require("highrise.bot");
 
 const bot = new Highrise(
-  ["ChatEvent"],
+  ["ChatEvent", "UserJoinedEvent", "UserLeftEvent"],
   {
+    LoggerOptions: {
+      showTimestamp: true,
+      showMethodName: true,
+      colors: true
+    },
     autoReconnect: true,
     reconnectDelay: 5000
   }
 );
 
 bot.on("ready", () => {
-  console.log("Bot is ready and in the room!");
+  console.log("Bot is online!");
+});
+
+bot.on("chatCreate", async (user, message) => {
+  if (message.toLowerCase() === "hello") {
+    await bot.message.send(`Hey ${user.username}! 👋`);
+  }
+});
+
+bot.on("playerJoin", async (user) => {
+  await bot.message.send(`Welcome ${user.username}! 🎉`);
 });
 
 bot.login(
