@@ -1,5 +1,6 @@
-from highrise import BaseBot, User, __main__
+from highrise import BaseBot, User
 import os
+import asyncio
 
 class MyBot(BaseBot):
     async def on_start(self):
@@ -16,6 +17,5 @@ if __name__ == "__main__":
     token = os.environ["BOT_TOKEN"]
     room_id = os.environ["ROOM_ID"]
     
-    import asyncio
-    from highrise.__main__ import run
-    asyncio.run(run(room_id, token, MyBot()))
+    from highrise.__main__ import main
+    main(["", token, room_id, "MyBot", "main"])
