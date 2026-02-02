@@ -1,5 +1,10 @@
 const { Highrise } = require("highrise.bot");
 
+// Print variables to debug
+console.log("Token exists:", !!process.env.BOT_TOKEN);
+console.log("Room ID exists:", !!process.env.ROOM_ID);
+console.log("Room ID value:", process.env.ROOM_ID);
+
 const bot = new Highrise(
   ["ChatEvent", "UserJoinedEvent", "UserLeftEvent"],
   {
@@ -9,7 +14,7 @@ const bot = new Highrise(
 );
 
 bot.on("ready", () => {
-  console.log("Bot is online!");
+  console.log("Bot is online and connected!");
 });
 
 bot.on("chatCreate", async (user, message) => {
